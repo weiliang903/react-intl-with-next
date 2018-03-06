@@ -1,0 +1,4 @@
+lang/.messages/
+.idea/
+.next/
+/node_modules
