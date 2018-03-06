@@ -1,5 +1,5 @@
 {
-  "name": "react-intl with next.js",
+  "name": "react-intl-with-next",
   "version": "1.0.0",
   "scripts": {
     "dev": "node server.js",
@@ -16,7 +16,8 @@
     "next": "latest",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-intl": "^2.2.3"
+    "react-intl": "^2.2.3",
+    "express": "^4.16.2"
   },
   "license": "ISC"
 }

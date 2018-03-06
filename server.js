@@ -6,15 +6,18 @@ Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat
 
 const {readFileSync} = require('fs')
 const {basename} = require('path')
-const {createServer} = require('http')
-const accepts = require('accepts')
+// const accepts = require('accepts')
 const glob = require('glob')
 const next = require('next')
+
+const express = require('express')
 const cookieParser = require('cookie-parser')
+
+// require('dotenv').config()
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
-const app = next({dev})
+const app = next({ dev })
 const handle = app.getRequestHandler()
 
 // Get the supported languages by looking for translations in the `lang/` dir.
@@ -33,16 +36,6 @@ const getLocaleDataScript = (locale) => {
   return localeDataCache.get(lang)
 }
 
-const detectLocale = (req) => {
-  const cookieLocale = req.headers.cookie
-  const lang = cookieLocale ? cookieLocale.split('=')[1] : 'en'
-  if (languages.indexOf(lang) !== -1) {
-    return lang
-  } else {
-    return 'en'
-  }
-}
-
 // We need to load and expose the translations on the request for the user's
 // locale. These will only be used in production, in dev the `defaultMessage` in
 // each message description in the source code will be used.
@@ -50,15 +43,51 @@ const getMessages = (locale) => {
   return require(`./lang/${locale}.json`)
 }
 
-app.prepare().then(() => {
-  createServer((req, res) => {
-    const locale = detectLocale(req)
-    req.locale = locale
-    req.localeDataScript = getLocaleDataScript(locale)
-    req.messages = getMessages(locale)
-    handle(req, res)
-  }).listen(port, (err) => {
-    if (err) throw err
-    console.log(`> Ready on http://localhost:${port}`)
+const detectLocale = (req) => {
+  const cookieLocale = req.cookies.locale
+  if (languages.indexOf(cookieLocale) !== -1) {
+    console.log('inner ==', cookieLocale)
+    return cookieLocale
+  } else {
+    return 'zh-cn'
+  }
+}
+
+app.prepare()
+  .then(() => {
+    const server = express()
+    server.use(cookieParser())
+    server.use((req, res, next) => {
+      const locale = detectLocale(req)
+      req.locale = locale
+      req.localeDataScript = getLocaleDataScript(locale)
+      req.messages = getMessages(locale)
+      res.cookie('locale', locale, { maxAge: (new Date() * 0.001) + (365 * 24 * 3600) })
+      next()
+    })
+
+    // server.get('/a', (req, res) => {
+    //   return app.render(req, res, '/b', req.query)
+    // })
+    //
+    // server.get('/b', (req, res) => {
+    //   return app.render(req, res, '/a', req.query)
+    // })
+    //
+    // server.get('/posts/:id', (req, res) => {
+    //   return app.render(req, res, '/posts', { id: req.params.id })
+    // })
+    //
+    server.get('*', (req, res) => {
+      return handle(req, res)
+    })
+
+    server.listen(port, (err) => {
+      if (err) throw err
+      console.log(`> Ready on http://localhost:${port}`)
+    })
   })
-})
+  .catch((ex) => {
+    console.error(ex.stack)
+    process.exit(1)
+  })
