@@ -1230,6 +1230,21 @@ convert-source-map@1.5.1, convert-source-map@^1.5.0:
   version "1.5.1"
   resolved "http://registry.npm.taobao.org/convert-source-map/download/convert-source-map-1.5.1.tgz#b8278097b9bc229365de5c62cf5fcaed8b5599e5"
 
+cookie-parser@^1.4.3:
+  version "1.4.3"
+  resolved "http://registry.npm.taobao.org/cookie-parser/download/cookie-parser-1.4.3.tgz#0fe31fa19d000b95f4aadf1f53fdc2b8a203baa5"
+  dependencies:
+    cookie "0.3.1"
+    cookie-signature "1.0.6"
+
+cookie-signature@1.0.6:
+  version "1.0.6"
+  resolved "http://registry.npm.taobao.org/cookie-signature/download/cookie-signature-1.0.6.tgz#e303a882b342cc3ee8ca513a79999734dab3ae2c"
+
+cookie@0.3.1:
+  version "0.3.1"
+  resolved "http://registry.npm.taobao.org/cookie/download/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
+
 copy-concurrently@^1.0.0:
   version "1.0.5"
   resolved "http://registry.npm.taobao.org/copy-concurrently/download/copy-concurrently-1.0.5.tgz#92297398cae34937fcafd6ec8139c18051f0b5e0"
@@ -2439,6 +2454,10 @@ isomorphic-fetch@^2.1.1:
 isstream@~0.1.2:
   version "0.1.2"
   resolved "http://registry.npm.taobao.org/isstream/download/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
+
+js-cookie@^2.2.0:
+  version "2.2.0"
+  resolved "http://registry.npm.taobao.org/js-cookie/download/js-cookie-2.2.0.tgz#1b2c279a6eece380a12168b92485265b35b1effb"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"

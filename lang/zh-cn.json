@@ -1,0 +1,7 @@
+{
+  "title": "React Intl Next.js Exemple",
+  "nav.home": "首页",
+  "nav.about": "关于",
+  "description": "在 Next.js 中使用 react-intl 的列子",
+  "greeting": "你好！"
+}

@@ -10,6 +10,7 @@ const {createServer} = require('http')
 const accepts = require('accepts')
 const glob = require('glob')
 const next = require('next')
+const cookieParser = require('cookie-parser')
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
@@ -32,6 +33,16 @@ const getLocaleDataScript = (locale) => {
   return localeDataCache.get(lang)
 }
 
+const detectLocale = (req) => {
+  const cookieLocale = req.headers.cookie
+  const lang = cookieLocale ? cookieLocale.split('=')[1] : 'en'
+  if (languages.indexOf(lang) !== -1) {
+    return lang
+  } else {
+    return 'en'
+  }
+}
+
 // We need to load and expose the translations on the request for the user's
 // locale. These will only be used in production, in dev the `defaultMessage` in
 // each message description in the source code will be used.
@@ -41,11 +52,10 @@ const getMessages = (locale) => {
 
 app.prepare().then(() => {
   createServer((req, res) => {
-    const accept = accepts(req)
-    const locale = accept.language(dev ? ['en'] : languages)
+    const locale = detectLocale(req)
     req.locale = locale
     req.localeDataScript = getLocaleDataScript(locale)
-    req.messages = dev ? {} : getMessages(locale)
+    req.messages = getMessages(locale)
     handle(req, res)
   }).listen(port, (err) => {
     if (err) throw err
