@@ -33,6 +33,7 @@ export default (Page) => {
     }
 
     render () {
+      console.log('locale =>>', this.props)
       const {locale, messages, now, ...props} = this.props
       return (
         <IntlProvider locale={locale} messages={messages} initialNow={now}>

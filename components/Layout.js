@@ -3,6 +3,8 @@ import {defineMessages, injectIntl} from 'react-intl'
 import Head from 'next/head'
 import Nav from './Nav'
 
+import '../styles/style.scss'
+
 const messages = defineMessages({
   title: {
     id: 'title',
@@ -11,7 +13,7 @@ const messages = defineMessages({
 })
 
 export default injectIntl(({intl, title, children}) => (
-  <div>
+  <div className='example'>
     <Head>
       <meta name='viewport' content='width=device-width, initial-scale=1' />
       <title>{title || intl.formatMessage(messages.title)}</title>
