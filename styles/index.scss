@@ -1,0 +1,40 @@
+
+// dark theme
+$white: hsl(0, 0%, 100%);
+$light: hsl(0, 0%, 96%);
+$black: #000000;
+$dark-grey: #1e1f29;
+$light-grey: #383b53;
+$green: #50fb7c;
+
+$background: $light-grey;
+$body-background-color: $dark-grey;
+
+$text: $white;
+$text-strong: $white;
+$title-color: $white;
+$subtitle-color: $white;
+$link: #49baff;
+$link-hover: $white;
+
+$warning: #f0fb8c;
+$danger: #fc4346;
+
+$message-background-color: $dark-grey;
+$message-body-color: $white;
+$message-body-pre-background-color: $light-grey;
+
+$navbar-dropdown-boxed-shadow: 0 8px 8px rgba($black, 0.1), 0 0 0 1px rgba($light-grey, 1);
+$navbar-dropdown-item-hover-color: $link;
+$navbar-item-active-color: $link;
+$navbar-background-color: $dark-grey;
+$navbar-dropdown-background-color: $dark-grey;
+$navbar-item-color: $light;
+
+$menu-item-hover-color: $dark-grey;
+$menu-item-hover-background-color: $white;
+$menu-item-active-color: $link;
+
+$code: $link;
+
+@import '~bulma/bulma';

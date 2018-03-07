@@ -1,9 +1,17 @@
 import React from 'react'
 import {defineMessages, injectIntl} from 'react-intl'
 import Head from 'next/head'
-import Nav from './Nav'
+import fontawesome from '@fortawesome/fontawesome'
+import { faPatreon } from '@fortawesome/fontawesome-free-brands'
+import { faHeart } from '@fortawesome/fontawesome-free-regular'
+import { faChartBar } from '@fortawesome/fontawesome-free-solid'
 
-import '../styles/style.scss'
+fontawesome.library.add(faPatreon, faHeart, faChartBar)
+
+import Nav from '../Navbar'
+
+import '../../styles/index.scss'
+import '../../styles/style.scss'
 
 const messages = defineMessages({
   title: {

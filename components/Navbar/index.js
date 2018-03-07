@@ -14,15 +14,5 @@ export default () => (
         <a><FormattedMessage id='nav.about' defaultMessage='About' /></a>
       </Link>
     </li>
-
-    <style jsx>{`
-      nav {
-        display: flex;
-      }
-      li {
-        list-style: none;
-        margin-right: 1rem;
-      }
-    `}</style>
   </nav>
 )
